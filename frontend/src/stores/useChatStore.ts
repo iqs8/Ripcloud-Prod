@@ -1,5 +1,4 @@
 import { axiosInstance } from "@/lib/axios";
-import axios from "axios";
 import {create} from "zustand"
 
 interface ChatStore {

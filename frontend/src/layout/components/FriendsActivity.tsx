@@ -1,19 +1,18 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ScrollArea } from '@/components/ui/scroll-area';
+
 import { UseChatStore } from '@/stores/useChatStore'
 import { useUser } from '@clerk/clerk-react';
-import { HeadphonesIcon, Music, Users } from 'lucide-react';
-import React, { useEffect } from 'react'
+import { HeadphonesIcon, Users } from 'lucide-react';
+import { useEffect } from 'react'
 
 export const FriendsActivity = () => {
-    const { users, isLoading, error, fetchUsers } = UseChatStore();
+    const {  fetchUsers } = UseChatStore();
     const {user} = useUser();
 
     useEffect(() => {
         fetchUsers();
     }, [fetchUsers, user])
 
-    const isPlaying = true;
+    // const isPlaying = true;
 
   return (
     <div className='h-full bg-zinc-900 rounded-lg flex flex-col'>

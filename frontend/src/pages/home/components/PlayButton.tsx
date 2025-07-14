@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Song } from '@/types'
 import { usePlayerStore } from '@/stores/usePlayerStore'
 import { Button } from '@/components/ui/button'

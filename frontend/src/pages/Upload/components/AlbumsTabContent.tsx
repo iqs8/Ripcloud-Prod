@@ -1,7 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Library } from "lucide-react";
 import { AlbumsTable } from "./AlbumsTable";
-import { Button } from "@/components/ui/button";
 import AddAlbumDialog from "./AddAlbumDialog";
 // import AddAlbumDialog from "./AddAlbumDialog";
 

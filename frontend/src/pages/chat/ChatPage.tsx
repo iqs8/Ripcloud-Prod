@@ -1,4 +1,3 @@
-import React from 'react';
 import Topbar from "@/components/Topbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

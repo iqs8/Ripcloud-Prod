@@ -2,7 +2,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { SignedIn } from '@clerk/clerk-react'
 import { HomeIcon, Library, MessageCircle } from 'lucide-react'
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import PlaylistSkeleton from '@/components/skeletons/PlaylistSkeleton'
@@ -13,7 +13,7 @@ import { useMusicStore } from '@/stores/useMusicStore'
 export const LeftSidebar = () => {
 
   //fetch data, use zustand
-  const {songs,albums,fetchAlbums, isLoading} = useMusicStore()
+  const {albums,fetchAlbums, isLoading} = useMusicStore()
 
   useEffect(() => {
     fetchAlbums();

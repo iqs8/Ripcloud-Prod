@@ -1,7 +1,6 @@
 import SectionGridSkeleton from '@/components/skeletons/SectionGridSkeleton';
 import { Button } from '@/components/ui/button';
 import type { Song } from '@/types';
-import React from 'react'
 import { PlayButton } from './PlayButton';
 
 type SectionGridProps = {
