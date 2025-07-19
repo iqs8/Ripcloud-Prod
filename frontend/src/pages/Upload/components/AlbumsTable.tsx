@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useMusicStore } from "@/stores/useMusicStore";
 import { Calendar, Music, Trash2 } from "lucide-react";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export const AlbumsTable = () => {
 	const { albums, deleteAlbum, fetchAlbums } = useMusicStore();
@@ -48,7 +49,13 @@ export const AlbumsTable = () => {
 								<Button
 									variant='ghost'
 									size='sm'
-									onClick={() => deleteAlbum(album._id)}
+									onClick={() => {
+										if (album.artistName === "Admin") {
+											toast.error("Deleting admin albums is disabled.");
+										} else {
+											deleteAlbum(album._id);
+										}
+									}}
 									className='text-red-400 hover:text-red-300 hover:bg-red-400/10'
 								>
 									<Trash2 className='h-4 w-4' />

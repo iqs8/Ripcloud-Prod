@@ -3,7 +3,7 @@ import { LayoutDashboardIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { buttonVariants } from "./ui/button";
+import {  buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import UploadSongButton from "./UploadSongButton";
 

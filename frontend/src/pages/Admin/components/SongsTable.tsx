@@ -41,7 +41,7 @@ const SongsTable = () => {
 							<img src={song.imageUrl} alt={song.title} className='size-10 rounded object-cover' />
 						</TableCell>
 						<TableCell className='font-medium'>{song.title}</TableCell>
-						<TableCell>{song.artist}</TableCell>
+						<TableCell>{song.artistName || song.artist}</TableCell>
 						<TableCell>
 							<span className='inline-flex items-center gap-1 text-zinc-400'>
 								<Calendar className='h-4 w-4' />

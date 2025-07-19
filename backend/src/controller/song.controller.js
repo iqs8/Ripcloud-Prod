@@ -8,7 +8,7 @@ export const getAllUserSongs = async(req, res, next) => {
 
         // Only return songs where artist is "Default" or the user's token
         const songs = await Song.find({
-            artistId: { $in: ["Default", userId] }
+            artistId: { $in: ["Admin", userId] }
         }).sort({createdAt: -1});
         res.json(songs)
     } catch (error) {
@@ -27,19 +27,33 @@ export const getAllSongs = async(req, res, next) => {
 
 export const getDefaultSongs = async (req, res, next) => {
     try {
-        //get 6 random songs using mongo's aggregation pipeline
+        // get 6 random songs, excluding specific titles
         const songs = await Song.aggregate([
             {
-                $sample: {size:6}
+                $match: {
+                    title: {
+                        $nin: [
+                            "Government Hooker x Toji",
+                            "Rock That Body",
+                            "Died Once",
+                            "My Order",
+                            "My Ordinary Life"
+                        ]
+                    }
+                }
             },
             {
-            $project:{
-                _id:1,
-                title:1,
-                artist:1,
-                imageUrl:1,
-                audioUrl:1,
-                },
+                $sample: { size: 6 }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    artist: 1,
+                    artistName: 1,
+                    imageUrl: 1,
+                    audioUrl: 1,
+                }
             },
         ])
         res.json(songs);
@@ -50,27 +64,38 @@ export const getDefaultSongs = async (req, res, next) => {
 }
 
 export const getMostListenedToSongs = async (req, res, next) => {
-     try {
-        //get 4 random songs using mongo's aggregation pipeline
-        const songs = await Song.aggregate([
-            {
-                $sample: {size:4}
-            },
-            {
-            $project:{
-                _id:1,
-                title:1,
-                artist:1,
-                imageUrl:1,
-                audioUrl:1,
-                },
-            },
-        ])
-        res.json(songs);
+    try {
+       // Find songs with specific titles
+       const songs = await Song.aggregate([
+           {
+               $match: {
+                   title: {
+                       $in: [
+                           "Government Hooker x Toji",
+                           "Rock That Body",
+                           "Died Once",
+                           "My Order",
+                           "My Ordinary Life"
+                       ]
+                   }
+               }
+           },
+           {
+               $project: {
+                   _id: 1,
+                   title: 1,
+                   artist: 1,
+                   artistName: 1,
+                   imageUrl: 1,
+                   audioUrl: 1,
+               }
+           },
+       ])
+       res.json(songs);
 
-    } catch (error) {
-        next(error)
-    }
+   } catch (error) {
+       next(error)
+   }
 }
 
 export const getSharedWithMeSongs = async (req, res, next) => {

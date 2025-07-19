@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { axiosInstance } from "@/lib/axios";
 import { useMusicStore } from "@/stores/useMusicStore";
 import { Plus, Upload } from "lucide-react";
 import { useRef, useState } from "react";
@@ -29,7 +28,8 @@ interface NewSong {
 const AddSongDialog = () => {
 	const { albums } = useMusicStore();
 	const [songDialogOpen, setSongDialogOpen] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading] = useState(false);
+	//const [isLoading, setIsLoading] = useState(false);
 	const { user } = useUser();
 
 	const [newSong, setNewSong] = useState<NewSong>({
@@ -49,54 +49,57 @@ const AddSongDialog = () => {
 	const audioInputRef = useRef<HTMLInputElement>(null);
 	const imageInputRef = useRef<HTMLInputElement>(null);
 
+	// const handleSubmit = async () => {
+	// 	setIsLoading(true);
+
+	// 	try {
+	// 		if (!files.audio || !files.image) {
+	// 			return toast.error("Please upload both audio and image files");
+	// 		}
+
+	// 		const formData = new FormData();
+
+	// 		formData.append("title", newSong.title);
+	// 		formData.append("artist", user?.id || ""); // 3. Always use Clerk user ID
+	// 		formData.append("artistId", user?.id || "");
+	// 		formData.append("artistName", user?.fullName || user?.username || "Unknown Artist");
+	// 		console.log("User id is ", user?.id)
+	// 		formData.append("duration", newSong.duration || "100" );
+	// 		if (newSong.album && newSong.album !== "none") {
+	// 			formData.append("albumId", newSong.album);
+	// 		}
+
+	// 		formData.append("audioFile", files.audio);
+	// 		formData.append("imageFile", files.image);
+
+	// 		await axiosInstance.post("/admin/songs", formData, {
+	// 			headers: {
+	// 				"Content-Type": "multipart/form-data",
+	// 			},
+	// 		});
+
+	// 		setNewSong({
+	// 			title: "",
+	// 			artist: "",
+	// 			artistId: user?.id || "",
+	// 			artistName: user?.fullName || user?.username || "Unknown Artist",
+	// 			album: "",
+	// 			duration: "",
+	// 		});
+
+	// 		setFiles({
+	// 			audio: null,
+	// 			image: null,
+	// 		});
+	// 		toast.success("Song added successfully");
+	// 	} catch (error: any) {
+	// 		toast.error("Failed to add song: " + error.message);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// };
 	const handleSubmit = async () => {
-		setIsLoading(true);
-
-		try {
-			if (!files.audio || !files.image) {
-				return toast.error("Please upload both audio and image files");
-			}
-
-			const formData = new FormData();
-
-			formData.append("title", newSong.title);
-			formData.append("artist", user?.id || ""); // 3. Always use Clerk user ID
-			formData.append("artistId", user?.id || "");
-			formData.append("artistName", user?.fullName || user?.username || "Unknown Artist");
-			console.log("User id is ", user?.id)
-			formData.append("duration", newSong.duration || "100" );
-			if (newSong.album && newSong.album !== "none") {
-				formData.append("albumId", newSong.album);
-			}
-
-			formData.append("audioFile", files.audio);
-			formData.append("imageFile", files.image);
-
-			await axiosInstance.post("/admin/songs", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
-
-			setNewSong({
-				title: "",
-				artist: "",
-				artistId: user?.id || "",
-				artistName: user?.fullName || user?.username || "Unknown Artist",
-				album: "",
-				duration: "",
-			});
-
-			setFiles({
-				audio: null,
-				image: null,
-			});
-			toast.success("Song added successfully");
-		} catch (error: any) {
-			toast.error("Failed to add song: " + error.message);
-		} finally {
-			setIsLoading(false);
-		}
+		toast.error("Uploading songs is disabled.");
 	};
 
 	return (

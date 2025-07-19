@@ -9,17 +9,17 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { axiosInstance } from "@/lib/axios";
 import { Plus, Upload } from "lucide-react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useUser } from "@clerk/clerk-react";
+//import { useUser } from "@clerk/clerk-react";
 
 const AddAlbumDialog = () => {
 	const [albumDialogOpen, setAlbumDialogOpen] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading] = useState(false);
+	//const [isLoading, setIsLoading] = useState(false);
 	const fileInputRef = useRef<HTMLInputElement>(null);
-	const { user } = useUser();
+	//const { user } = useUser();
 
 	const [newAlbum, setNewAlbum] = useState({
 		title: "",
@@ -36,42 +36,45 @@ const AddAlbumDialog = () => {
 		}
 	};
 
+	// const handleSubmit = async () => {
+	// 	setIsLoading(true);
+
+	// 	try {
+	// 		if (!imageFile) {
+	// 			return toast.error("Please upload an image");
+	// 		}
+
+	// 		const formData = new FormData();
+	// 		formData.append("title", newAlbum.title);
+	// 		formData.append("artist", user?.id || "");
+	// 		formData.append("artistId", user?.id || "");
+	// 		formData.append("artistName", user?.fullName || user?.username || "Unknown Artist");
+	// 		console.log( user?.id)
+	// 		formData.append("releaseYear", newAlbum.releaseYear.toString());
+	// 		formData.append("imageFile", imageFile);
+
+	// 		await axiosInstance.post("/admin/albums", formData, {
+	// 			headers: {
+	// 				"Content-Type": "multipart/form-data",
+	// 			},
+	// 		});
+
+	// 		setNewAlbum({
+	// 			title: "",
+	// 			artist: "",
+	// 			releaseYear: new Date().getFullYear(),
+	// 		});
+	// 		setImageFile(null);
+	// 		setAlbumDialogOpen(false);
+	// 		toast.success("Album created successfully");
+	// 	} catch (error: any) {
+	// 		toast.error("Failed to create album: " + error.message);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// };
 	const handleSubmit = async () => {
-		setIsLoading(true);
-
-		try {
-			if (!imageFile) {
-				return toast.error("Please upload an image");
-			}
-
-			const formData = new FormData();
-			formData.append("title", newAlbum.title);
-			formData.append("artist", user?.id || "");
-			formData.append("artistId", user?.id || "");
-			formData.append("artistName", user?.fullName || user?.username || "Unknown Artist");
-			console.log( user?.id)
-			formData.append("releaseYear", newAlbum.releaseYear.toString());
-			formData.append("imageFile", imageFile);
-
-			await axiosInstance.post("/admin/albums", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
-
-			setNewAlbum({
-				title: "",
-				artist: "",
-				releaseYear: new Date().getFullYear(),
-			});
-			setImageFile(null);
-			setAlbumDialogOpen(false);
-			toast.success("Album created successfully");
-		} catch (error: any) {
-			toast.error("Failed to create album: " + error.message);
-		} finally {
-			setIsLoading(false);
-		}
+		toast.error("Uploading albums is disabled.");
 	};
 
 	return (

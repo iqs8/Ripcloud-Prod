@@ -4,7 +4,8 @@ import { clerkMiddleware } from '@clerk/express'
 import fileUpload from "express-fileupload"
 import path from "path"
 import cors from "cors"
-import cron from "node-cron";
+import cron from "node-cron"
+import fs from "fs"
 
 import userRoutes from "./routes/user.route.js"
 import adminRoutes from "./routes/admin.route.js"
@@ -36,7 +37,6 @@ app.use(fileUpload ({
     },
 }))
 
-// cron jobs
 const tempDir = path.join(process.cwd(), "tmp");
 cron.schedule("0 * * * *", () => {
 	if (fs.existsSync(tempDir)) {
@@ -69,15 +69,13 @@ if (process.env.NODE_ENV === "production") {
 //error handler
 app.use((err, req, res, next) => {
     if (res.headersSent) {
-        // Let Express handle the error (logging, closing connection, etc.)
         return next(err);
     }
-    // Safe to send your error response
     else {res.status(500).json({ message: "Internal server error" })
     };
 });
 
-app.listen(5000, () =>{
+app.listen(PORT, () =>{
     console.log("server is listening in port 5000")
     connectDB();
 })
