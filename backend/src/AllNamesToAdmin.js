@@ -5,7 +5,7 @@ import { config } from "dotenv";
 
 config({ path: "../.env" });
 
-// ... existing code ...
+
 const migrateArtistFields = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
@@ -27,7 +27,7 @@ const migrateArtistFields = async () => {
         console.log("Database connection closed");
     }
 };
-// ... existing code ...
+
 
 // Run migration
 migrateArtistFields();
