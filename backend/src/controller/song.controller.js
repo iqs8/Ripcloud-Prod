@@ -71,7 +71,7 @@ export const getMostListenedToSongs = async (req, res, next) => {
                $match: {
                    title: {
                        $in: [
-                           "Government Hooker x Toji",
+                           "Government Hooker",
                            "Rock That Body",
                            "Died Once",
                            "My Order",
