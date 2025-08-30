@@ -33,7 +33,7 @@ export const getDefaultSongs = async (req, res, next) => {
                 $match: {
                     title: {
                         $nin: [
-                            "Government Hooker x Toji",
+                            "Government Hooker",
                             "Rock That Body",
                             "Died Once",
                             "My Order",
